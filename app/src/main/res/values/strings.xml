@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CreditApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="go_to_history">Ir a historial</string>
+    <string name="go_to_details">Ir a detalles</string>
+    <string name="calcular_cuotas">Calcular cuotas</string>
+    <string name="valor_credito">Valor crédito</string>
+    <string name="cedula">Cédula</string>
+    <string name="cuotas">Cuotas</string>
+</resources>

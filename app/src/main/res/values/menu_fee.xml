@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="fee12" type="string">12</item>
+    <item name="fee24" type="string">24</item>
+    <item name="fee36" type="string">36</item>
+    <item name="fee48" type="string">48</item>
+    <item name="fee60" type="string">60</item>
+    <item name="fee72" type="string">72</item>
+</resources>
