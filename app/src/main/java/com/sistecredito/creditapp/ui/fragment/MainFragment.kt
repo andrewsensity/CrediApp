@@ -63,11 +63,11 @@ class MainFragment : Fragment() {
 
             listFee.add(feeWI)
         }
-        for (i in listFee) {
-            binding.resultValueFee.text = "$i ---------- $listFee"
-        }
+//        for (i in listFee) {
+//            binding.resultValueFee.text = "$i ---------- $listFee"
+//        }
 
-        //binding.resultValueFee.text = "El valor de las cuotas es de: $$listFee"
+        binding.resultValueFee.text = "El valor de las cuotas es de: $$listFee"
 
         with(binding) {
             ilCredit.visibility = View.GONE
