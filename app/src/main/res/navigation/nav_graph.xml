@@ -28,7 +28,7 @@
             android:id="@+id/action_historyFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
         <argument
-            android:name="cc"
-            app:argType="string" />
+            android:name="listData"
+            app:argType="com.sistecredito.creditapp.data.model.Users[]" />
     </fragment>
 </navigation>

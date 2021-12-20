@@ -16,22 +16,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    <com.google.android.material.card.MaterialCardView-->
-    <!--        android:layout_width="200dp"-->
-    <!--        android:layout_height="120dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/main_image"-->
-    <!--        android:layout_marginTop="-60dp"-->
-    <!--        android:backgroundTint="@color/black"/>-->
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ilCredit"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/horizontalMargin"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_image">
@@ -50,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/horizontalMargin"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ilCredit">
@@ -69,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/horizontalMargin"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ilCc">
@@ -87,24 +78,41 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="@string/calcular_cuotas"
         android:textAllCaps="false"
-        app:cornerRadius="10dp"
+        android:textSize="18sp"
+        app:cornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="@+id/ilFee"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clearBtn"
+        app:layout_constraintTop_toBottomOf="@id/ilFee" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/clearBtn"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/limpiar_registros"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/calculateBtn"
+        app:layout_constraintStart_toStartOf="@+id/ilFee"
         app:layout_constraintTop_toBottomOf="@id/ilFee" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/resultValueFee"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@id/calculateBtn"
-        app:layout_constraintHorizontal_bias="0"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="AQUI"
+        android:gravity="center_horizontal"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintBottom_toTopOf="@+id/goToHistory"
+        app:layout_constraintEnd_toEndOf="@+id/ilFee"
         app:layout_constraintStart_toStartOf="@id/ilFee"
-        app:layout_constraintTop_toTopOf="@id/calculateBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/message" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/goToHistory"
@@ -122,5 +130,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.98" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_image"
+        android:text="Tu credito sera diferido a 9 cuotas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

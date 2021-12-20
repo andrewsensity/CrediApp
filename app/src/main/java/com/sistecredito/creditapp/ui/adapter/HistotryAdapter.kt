@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sistecredito.creditapp.R
-import com.sistecredito.creditapp.data.DataSource
 import com.sistecredito.creditapp.data.model.Users
 
-class HistotryAdapter(val listCC: List<String>): RecyclerView.Adapter<HistotryAdapter.HistoryViewHolder>() {
+class HistotryAdapter(val listCC: MutableList<Users>): RecyclerView.Adapter<HistotryAdapter.HistoryViewHolder>() {
     class HistoryViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val userCC = view.findViewById<TextView>(R.id.user)
     }
@@ -20,8 +19,8 @@ class HistotryAdapter(val listCC: List<String>): RecyclerView.Adapter<HistotryAd
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        val list = listCC[position]
-        holder.userCC.text = list
+        val list = listCC[position].cc
+        holder.userCC.text = list.toString()
     }
 
     override fun getItemCount(): Int = listCC.size
