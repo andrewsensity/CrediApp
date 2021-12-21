@@ -18,7 +18,11 @@
         android:id="@+id/detailFragment"
         android:name="com.sistecredito.creditapp.ui.fragment.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="listDetails"
+            app:argType="com.sistecredito.creditapp.data.model.Users[]" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.sistecredito.creditapp.ui.fragment.HistoryFragment"

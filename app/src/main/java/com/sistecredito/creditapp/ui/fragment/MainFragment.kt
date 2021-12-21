@@ -5,11 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.LinearLayout
+import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.core.view.marginTop
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.sistecredito.creditapp.R
 import com.sistecredito.creditapp.data.model.Users
 import com.sistecredito.creditapp.databinding.FragmentMainBinding
+import com.sistecredito.creditapp.ui.adapter.FeeAdapter
+import java.lang.reflect.Parameter
 
 class MainFragment : Fragment() {
 
@@ -17,8 +25,7 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var navController: NavController
     private var listMutable: MutableList<Users> = mutableListOf()
-    private var interest = 1.1
-    private val numberFee = 10
+    private var interest = 1.1f
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +48,7 @@ class MainFragment : Fragment() {
         }
 
         binding.clearBtn.setOnClickListener {
+            //navController.navigate(R.id.mainFragment)
             clearFields()
         }
 
@@ -49,33 +57,35 @@ class MainFragment : Fragment() {
             val action = MainFragmentDirections.actionMainFragmentToHistoryFragment(list)
             navController.navigate(action)
         }
+        binding.etFee.setOnClickListener { openOptionMenu(binding.etFee) }
     }
 
     private fun calculateInterest() {
         val creditValue = binding.etCredit.text.toString()
         val fee = binding.etFee.text.toString()
-        val listFee = mutableListOf<Double>()
+        val listFee = mutableListOf<Float>()
 
-        for (i in 0..numberFee) {
-            var feeWI = creditValue.toDouble() / fee.toDouble()
-            feeWI *= interest
-            interest -= 0.01
+        for (i in 0..fee.toInt()) {
+            var feeWOI = creditValue.toFloat() / fee.toFloat()
+            feeWOI *= interest
+            interest -= 0.01f
 
-            listFee.add(feeWI)
+            listFee.add(feeWOI)
         }
-//        for (i in listFee) {
-//            binding.resultValueFee.text = "$i ---------- $listFee"
-//        }
 
-        binding.resultValueFee.text = "El valor de las cuotas es de: $$listFee"
+        val adapter = FeeAdapter(listFee)
+        binding.recyclerFee.adapter = adapter
+        binding.recyclerFee.layoutManager = LinearLayoutManager(context)
+
+        binding.message.text = "Tu crédito sera diferido a $fee cuotas"
 
         with(binding) {
-            ilCredit.visibility = View.GONE
-            ilCc.visibility = View.GONE
-            ilFee.visibility = View.GONE
-            clearBtn.visibility = View.GONE
-            calculateBtn.visibility = View.GONE
-            message.visibility = View.VISIBLE
+            mainImage.visibility    = View.GONE
+            ilCc.visibility         = View.GONE
+            message.visibility      = View.VISIBLE
+            cardview.visibility     = View.VISIBLE
+            spacer.layoutParams     = ViewGroup.LayoutParams(0, 200)
+            spacer2.layoutParams    = ViewGroup.LayoutParams(0, 760)
         }
     }
 
@@ -93,6 +103,27 @@ class MainFragment : Fragment() {
             etCc.setText("")
             etFee.setText("")
         }
+    }
+
+    private fun openOptionMenu(it: View?) {
+        val popup = PopupMenu(it!!.context, it)
+        popup.menuInflater.inflate(R.menu.menu_fee, popup.menu)
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.one -> binding.etFee.setText("1")
+                R.id.two -> binding.etFee.setText("2")
+                R.id.three -> binding.etFee.setText("3")
+                R.id.four -> binding.etFee.setText("4")
+                R.id.five -> binding.etFee.setText("5")
+                R.id.six -> binding.etFee.setText("6")
+                R.id.seven -> binding.etFee.setText("7")
+                R.id.eigth -> binding.etFee.setText("8")
+                R.id.nine -> binding.etFee.setText("9")
+                R.id.ten -> binding.etFee.setText("10")
+            }
+            true
+        }
+        popup.show()
     }
 
     override fun onDestroyView() {
