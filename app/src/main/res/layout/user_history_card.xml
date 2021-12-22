@@ -8,15 +8,37 @@
     app:cardCornerRadius="8dp"
     android:backgroundTint="@color/purple_500">
 
-    <TextView
-        android:id="@+id/user"
-        tools:text="1020393773"
-        android:padding="10dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="@color/white"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/fees"
+            app:layout_constraintEnd_toEndOf="@+id/fees"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fees"
+            tools:text="1020393773" />
+
+        <TextView
+            android:id="@+id/fees"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="bottom"
+            android:padding="10dp"
+            android:text="10 Cuotas"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

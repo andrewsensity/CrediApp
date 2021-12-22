@@ -40,7 +40,7 @@
         android:backgroundTint="@color/purple_500"
         android:elevation="8dp"
         app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/goToDetail"
+        app:layout_constraintBottom_toTopOf="@+id/go_to_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv2"
@@ -137,11 +137,11 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/goToDetail"
+        android:id="@+id/go_to_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:text="@string/go_to_details"
+        android:text="@string/go_to_history"
         android:textAllCaps="false"
         app:icon="@drawable/ic_back"
         app:iconGravity="textEnd"

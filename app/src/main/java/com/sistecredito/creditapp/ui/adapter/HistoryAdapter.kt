@@ -22,6 +22,7 @@ class HistoryAdapter(val listCC: MutableList<Users>): RecyclerView.Adapter<Histo
 
     class HistoryViewHolder(view: View, listener: onItemClickListener): RecyclerView.ViewHolder(view) {
         val userCC = view.findViewById<TextView>(R.id.user)
+        val fees = view.findViewById<TextView>(R.id.fees)
 
         init {
             itemView.setOnClickListener {
@@ -38,6 +39,7 @@ class HistoryAdapter(val listCC: MutableList<Users>): RecyclerView.Adapter<Histo
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         val list = listCC[position]
         holder.userCC.text = list.cc.toString()
+        holder.fees.text = "${list.fee} Cuotas"
     }
 
     override fun getItemCount(): Int = listCC.size

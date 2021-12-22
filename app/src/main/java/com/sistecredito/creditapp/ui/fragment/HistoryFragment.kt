@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sistecredito.creditapp.R
+import com.sistecredito.creditapp.CreditApplication.Companion.prefs
 import com.sistecredito.creditapp.data.model.Users
 import com.sistecredito.creditapp.databinding.FragmentHistoryBinding
 import com.sistecredito.creditapp.ui.adapter.HistoryAdapter
@@ -51,8 +51,17 @@ class HistoryFragment : Fragment() {
             }
         })
 
-        binding.goToDetail.setOnClickListener {
-            navController.navigate(R.id.action_historyFragment_to_mainFragment)
+        binding.goToCredit.setOnClickListener {
+            navController.popBackStack()
+            prefs.wipe()
+        }
+        initUI() // SharedPreferences
+    }
+
+    private fun initUI() { // SharedPreferences
+        binding.goToCredit.setOnClickListener {
+            prefs.wipe()
+            navController.popBackStack()
         }
     }
 

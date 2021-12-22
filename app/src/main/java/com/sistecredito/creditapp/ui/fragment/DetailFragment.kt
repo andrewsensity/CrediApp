@@ -45,78 +45,14 @@ class DetailFragment : Fragment() {
         val posVal = args.posicion
         val dec = DecimalFormat("#,###")
 
-        when (posVal) {
-            0 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            1 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            2 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            3 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            4 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            5 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            6 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            7 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            8 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            9 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            10 -> {
-                binding.cc.text = listValues[posVal].cc.toString()
-                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
-                creditValue = listValues[posVal].credit
-                fee = listValues[posVal].fee
-            }
-            else -> null
-        }
+        binding.cc.text = listValues[posVal].cc.toString()
+        binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+        creditValue = listValues[posVal].credit
+        fee = listValues[posVal].fee
 
-        binding.goToDetail.setOnClickListener {
-            navController.navigate(R.id.action_detailFragment_to_mainFragment)
+
+        binding.goToHistory.setOnClickListener {
+            navController.popBackStack()
         }
         calculateInterest()
     }
@@ -125,7 +61,7 @@ class DetailFragment : Fragment() {
 
         val listFee = mutableListOf<Float>()
 
-        for (i in 0..fee) {
+        for (i in 0..fee - 1) {
             var feeWOI = creditValue.toFloat() / fee.toFloat()
             feeWOI *= interest
             interest -= 0.01f

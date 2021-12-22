@@ -3,6 +3,7 @@ package com.sistecredito.creditapp.ui.fragment
 import android.content.Context
 import android.os.Bundle
 import android.os.TokenWatcher
+import android.speech.tts.TextToSpeech
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.core.view.marginTop
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sistecredito.creditapp.CreditApplication.Companion.prefs
 import com.sistecredito.creditapp.R
 import com.sistecredito.creditapp.data.model.Users
 import com.sistecredito.creditapp.databinding.FragmentMainBinding
@@ -26,9 +28,14 @@ class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-    private lateinit var navController: NavController
     private var listMutable: MutableList<Users> = mutableListOf()
     private var interest = 1.1f
+    private lateinit var navController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //initUI() // SharedPreferences
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,11 +52,12 @@ class MainFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        binding.calculateBtn.setOnClickListener {
-            calculateInterest()
-            addListRecycler()
-            view.hideKeyboard()
-        }
+//        binding.calculateBtn.setOnClickListener {
+//            calculateInterest()
+//            accessToDetail() // SharedPreferences
+//            addListRecycler()
+//            view.hideKeyboard()
+//        }
 
         binding.clearBtn.setOnClickListener {
             clearFields()
@@ -64,19 +72,45 @@ class MainFragment : Fragment() {
             openOptionMenu(binding.etFee)
             view.hideKeyboard()
         }
+        initUI()
     }
 
-    fun View.hideKeyboard() {
+    private fun initUI() { // SharedPreferences
+        binding.calculateBtn.setOnClickListener {
+            accessToDetail()
+            calculateInterest()
+            addListRecycler()
+            view?.hideKeyboard()
+        }
+    }
+
+    private fun accessToDetail() { // SharedPreferences
+        if (binding.etCredit.text.toString().isNotEmpty() &&
+            binding.etCc.text.toString().isNotEmpty() &&
+            binding.etFee.text.toString().isNotEmpty()
+        ) {
+            prefs.credit = binding.etCredit.text.toString().toInt()
+            prefs.cc = binding.etCc.text.toString().toInt()
+            prefs.fee = binding.etFee.text.toString().toInt()
+        } else {
+            Toast.makeText(context, "Todos los campos deben contener datos", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     private fun calculateInterest() {
-        val creditValue = binding.etCredit.text.toString()
-        val fee = binding.etFee.text.toString()
+//        val creditValue = binding.etCredit.text.toString()
+//        val fee = binding.etFee.text.toString()
+        val creditValue = prefs.credit // SharedPreferences
+        val fee = prefs.fee // SharedPreferences
+
         val listFee = mutableListOf<Float>()
 
-        for (i in 0..fee.toInt()) {
+        for (i in 0..fee-1) {
             var feeWOI = creditValue.toFloat() / fee.toFloat()
             feeWOI *= interest
             interest -= 0.01f
@@ -92,7 +126,6 @@ class MainFragment : Fragment() {
 
         with(binding) {
             mainImage.visibility    = View.GONE
-//            ilCc.visibility         = View.GONE
             message.visibility      = View.VISIBLE
             cardview.visibility     = View.VISIBLE
             spacer.layoutParams     = ViewGroup.LayoutParams(0, 200)
@@ -101,11 +134,15 @@ class MainFragment : Fragment() {
     }
 
     private fun addListRecycler() {
-        val creditValue = binding.etCredit.text.toString()
-        val cc = binding.etCc.text.toString()
-        val fee = binding.etFee.text.toString()
+//        val creditValue = binding.etCredit.text.toString()
+//        val cc = binding.etCc.text.toString()
+//        val fee = binding.etFee.text.toString()
+        val creditValue = prefs.credit // SharedPreferences
+        val cc = prefs.cc // SharedPreferences
+        val fee = prefs.fee // SharedPreferences
 
-        listMutable.add(Users(cc.toInt(), creditValue.toInt(), fee.toInt()))
+//        listMutable.add(Users(cc.toInt(), creditValue.toInt(), fee.toInt()))
+        listMutable.add(Users(cc, creditValue, fee)) // SharedPreferences
     }
 
     private fun clearFields() {
