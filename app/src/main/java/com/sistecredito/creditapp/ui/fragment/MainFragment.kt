@@ -1,10 +1,13 @@
 package com.sistecredito.creditapp.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
+import android.os.TokenWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -45,10 +48,10 @@ class MainFragment : Fragment() {
         binding.calculateBtn.setOnClickListener {
             calculateInterest()
             addListRecycler()
+            view.hideKeyboard()
         }
 
         binding.clearBtn.setOnClickListener {
-            //navController.navigate(R.id.mainFragment)
             clearFields()
         }
 
@@ -57,7 +60,15 @@ class MainFragment : Fragment() {
             val action = MainFragmentDirections.actionMainFragmentToHistoryFragment(list)
             navController.navigate(action)
         }
-        binding.etFee.setOnClickListener { openOptionMenu(binding.etFee) }
+        binding.etFee.setOnClickListener {
+            openOptionMenu(binding.etFee)
+            view.hideKeyboard()
+        }
+    }
+
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     private fun calculateInterest() {
@@ -81,11 +92,11 @@ class MainFragment : Fragment() {
 
         with(binding) {
             mainImage.visibility    = View.GONE
-            ilCc.visibility         = View.GONE
+//            ilCc.visibility         = View.GONE
             message.visibility      = View.VISIBLE
             cardview.visibility     = View.VISIBLE
             spacer.layoutParams     = ViewGroup.LayoutParams(0, 200)
-            spacer2.layoutParams    = ViewGroup.LayoutParams(0, 760)
+            spacer2.layoutParams    = ViewGroup.LayoutParams(0, 1060)
         }
     }
 

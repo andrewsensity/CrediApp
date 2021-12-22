@@ -24,7 +24,7 @@ class FeeAdapter(val listCC: MutableList<Float>): RecyclerView.Adapter<FeeAdapte
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FeeViewHolder, position: Int) {
         val list = listCC[position]
-        val dec = DecimalFormat("#,###.##")
+        val dec = DecimalFormat("#,###")
         if (position != listCC.size) {
             holder.number.text = (position+1).toString()
             holder.value.text = "$${dec.format(list)}"

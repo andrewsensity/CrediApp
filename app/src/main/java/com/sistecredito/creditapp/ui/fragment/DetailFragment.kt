@@ -5,19 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sistecredito.creditapp.R
 import com.sistecredito.creditapp.data.model.Users
 import com.sistecredito.creditapp.databinding.FragmentDetailBinding
-import com.sistecredito.creditapp.ui.adapter.FeeAdapter
+import com.sistecredito.creditapp.ui.adapter.DetailsAdapter
+import java.text.DecimalFormat
 
 class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+    private lateinit var navController: NavController
     private lateinit var listValues: MutableList<Users>
     private var interest = 1.1f
-    private val args: HistoryFragmentArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
+    private var creditValue = 0
+    private var fee = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,25 +39,103 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //listValues = args.listData.toMutableList()
+        navController = Navigation.findNavController(view)
 
-//        for (i in 0 until listValues.size) {
-//            val creditValue = listValues[i].credit
-//            val fee = listValues[i].fee
-//            val listFee = mutableListOf<Float>()
-//
-//            for (i in 0..fee) {
-//                var feeWOI = creditValue.toFloat() / fee.toFloat()
-//                feeWOI *= interest
-//                interest -= 0.01f
-//
-//                listFee.add(feeWOI)
-//
-//                val adapter = FeeAdapter(listFee)
-//                binding.recyclerDetails.adapter = adapter
-//                binding.recyclerDetails.layoutManager = LinearLayoutManager(context)
-//            }
-//        }
+        listValues = args.listDetails.toMutableList()
+        val posVal = args.posicion
+        val dec = DecimalFormat("#,###")
+
+        when (posVal) {
+            0 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            1 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            2 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            3 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            4 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            5 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            6 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            7 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            8 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            9 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            10 -> {
+                binding.cc.text = listValues[posVal].cc.toString()
+                binding.credit.text = "$${dec.format(listValues[posVal].credit)}"
+                creditValue = listValues[posVal].credit
+                fee = listValues[posVal].fee
+            }
+            else -> null
+        }
+
+        binding.goToDetail.setOnClickListener {
+            navController.navigate(R.id.action_detailFragment_to_mainFragment)
+        }
+        calculateInterest()
+    }
+
+    private fun calculateInterest() {
+
+        val listFee = mutableListOf<Float>()
+
+        for (i in 0..fee) {
+            var feeWOI = creditValue.toFloat() / fee.toFloat()
+            feeWOI *= interest
+            interest -= 0.01f
+
+            listFee.add(feeWOI)
+        }
+
+        val adapter = DetailsAdapter(listFee)
+        binding.recyclerDetails.adapter = adapter
+        binding.recyclerDetails.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onDestroyView() {

@@ -33,7 +33,7 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:text="@string/go_to_details"
         android:textAllCaps="false"
-        app:icon="@drawable/ic_detail"
+        app:icon="@drawable/ic_back"
         app:iconGravity="textEnd"
         app:iconPadding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

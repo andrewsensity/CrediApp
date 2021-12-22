@@ -11,7 +11,7 @@ import com.sistecredito.creditapp.data.model.Users
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
-class DetailsAdapter(val listCC: MutableList<Users>): RecyclerView.Adapter<DetailsAdapter.FeeViewHolder>() {
+class DetailsAdapter(val listCC: MutableList<Float>): RecyclerView.Adapter<DetailsAdapter.FeeViewHolder>() {
     class FeeViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val number = view.findViewById<TextView>(R.id.number)
         val value = view.findViewById<TextView>(R.id.value)
@@ -25,7 +25,7 @@ class DetailsAdapter(val listCC: MutableList<Users>): RecyclerView.Adapter<Detai
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FeeViewHolder, position: Int) {
         val list = listCC[position]
-        val dec = DecimalFormat("#,###.##")
+        val dec = DecimalFormat("#,###")
         if (position != listCC.size) {
             holder.number.text = (position+1).toString()
             holder.value.text = "$${dec.format(list)}"

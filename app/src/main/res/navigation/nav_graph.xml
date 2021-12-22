@@ -22,6 +22,12 @@
         <argument
             android:name="listDetails"
             app:argType="com.sistecredito.creditapp.data.model.Users[]" />
+        <argument
+            android:name="posicion"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -34,5 +40,8 @@
         <argument
             android:name="listData"
             app:argType="com.sistecredito.creditapp.data.model.Users[]" />
+        <action
+            android:id="@+id/action_historyFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>
